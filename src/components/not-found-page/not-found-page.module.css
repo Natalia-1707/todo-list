@@ -1,0 +1,15 @@
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+  color: var(--color-dark);
+}
+
+.title,
+.link {
+  text-align: center;
+}
