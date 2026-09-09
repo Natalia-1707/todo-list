@@ -11,13 +11,14 @@ body {
 :root {
   font-family: 'Montserrat', sans-serif;
   --color-background: #f7f7f5;
+  --color-text-light: #6f6e73;
   --color-primary: #cc99ff;
   --color-dark: #404040;
   --color-light: #e5ccff;
   --color-white: #ffffff;
-  --color-tasks: #d9f99d;
-  --color-diary: #d8b4fe;
-  --color-birthday: #fef08a;
-  --color-books: #fed7aa;
-  --color-motivation: #f9a8d4;
+  --color-tasks: #beeb92;
+  --color-diary: #d4c2fc;
+  --color-birthday: #ffe66d;
+  --color-books: #ffc4a8;
+  --color-motivation: #ffa6d9;
 }
