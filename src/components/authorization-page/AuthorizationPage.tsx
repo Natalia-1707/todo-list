@@ -1,6 +1,9 @@
 import styles from './authorization-page.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function AuthorizationPage() {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.wrapper}>
       <h3 className={styles.title}>Авторизация</h3>
@@ -12,7 +15,9 @@ function AuthorizationPage() {
           </div>
         </form>
       </div>
-      <button className={styles.button}>Запланировать</button>
+      <button className={styles.button} onClick={() => navigate('/todo')}>
+        Запланировать
+      </button>
     </div>
   );
 }

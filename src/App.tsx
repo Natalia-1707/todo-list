@@ -8,8 +8,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/authorize" replace />} />
-      <Route path="/authorize" element={<AuthorizationPage />} />;
-      <Route path="/todo" element={<AppPage />} />;
+      <Route path="/authorize" element={<AuthorizationPage />} />
+      <Route path="/todo" element={<AppPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
