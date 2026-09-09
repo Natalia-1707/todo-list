@@ -2,11 +2,11 @@ import styles from './app-page.module.css';
 
 function AppPage() {
   const buttons = [
-    { id: 'tasks', title: 'Мои задачи' },
-    { id: 'diary', title: 'Дневник' },
-    { id: 'birthdays', title: 'Дни рождения' },
-    { id: 'books', title: 'Мои книги и фильмы' },
-    { id: 'motivation', title: 'Мотивашки' },
+    { id: 'tasks', title: 'Мои задачи', icon: '✅' },
+    { id: 'diary', title: 'Дневник', icon: '📖' },
+    { id: 'birthdays', title: 'Дни рождения', icon: '🎈' },
+    { id: 'books', title: 'Мои книги и фильмы', icon: '🎬' },
+    { id: 'motivation', title: 'Мотивашки', icon: '⭐' },
   ];
   return (
     <div className={styles.wrapper}>
@@ -16,7 +16,10 @@ function AppPage() {
       </div>
       <div className={styles.buttons}>
         {buttons.map((button) => (
-          <button key={button.id}>{button.title}</button>
+          <button key={button.id}>
+            <span className={styles.icon}>{button.icon}</span>
+            <span>{button.title}</span>
+          </button>
         ))}
       </div>
     </div>
