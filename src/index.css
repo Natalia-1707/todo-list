@@ -21,4 +21,9 @@ body {
   --color-birthday: #ffe66d;
   --color-books: #ffc4a8;
   --color-motivation: #ffa6d9;
+  --color-tasks-border: #4f941d;
+  --color-diary-border: #683fe4;
+  --color-birthday-border: #a38600;
+  --color-books-border: #c35a36;
+  --color-motivation-border: #c0257b;
 }

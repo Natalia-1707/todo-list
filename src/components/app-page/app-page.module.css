@@ -99,21 +99,21 @@ h2 {
 }
 
 .buttons button:nth-child(1):hover {
-  border: 3px solid #4f941d;
+  border: 3px solid var(--color-tasks-border);
 }
 
 .buttons button:nth-child(2):hover {
-  border: 3px solid #683fe4;
+  border: 3px solid var(--color-diary-border);
 }
 
 .buttons button:nth-child(3):hover {
-  border: 3px solid #a38600;
+  border: 3px solid var(--color-birthday-border);
 }
 
 .buttons button:nth-child(4):hover {
-  border: 3px solid #c35a36;
+  border: 3px solid var(--color-books-border);
 }
 
 .buttons button:nth-child(5):hover {
-  border: 3px solid #c0257b;
+  border: 3px solid var(--color-motivation-border);
 }
