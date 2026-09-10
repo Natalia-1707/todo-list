@@ -1,4 +1,5 @@
 import styles from './app-page.module.css';
+import { DateTime } from '../date-time/DateTime';
 import tasksIcon from '../../assets/images/tasks.svg';
 import diaryIcon from '../../assets/images/diary.svg';
 import birthdayIcon from '../../assets/images/birthdays.svg';
@@ -20,7 +21,7 @@ function AppPage() {
           <h2>Привет, ИМЯ!</h2>
           <span>Давай сделаем этот день продуктивным!</span>
         </div>
-        <p>00:00:00</p>
+        <DateTime />
       </div>
       <div className={styles.buttons}>
         {buttons.map((button) => (

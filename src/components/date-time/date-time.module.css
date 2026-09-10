@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  gap: 0.5rem;
+  border-radius: 17px;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-white);
+  box-shadow:
+    6px 6px 12px rgba(0, 0, 0, 0.1),
+    -5px -5px 10px rgba(255, 255, 255, 0.1);
+}
