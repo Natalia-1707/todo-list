@@ -1,14 +1,11 @@
 import styles from './tasks.module.css';
 import plusIcon from '../../assets/images/plus.svg';
 import tasksIcon from '../../assets/images/tasksmodal.svg';
+import type { Task } from './task.types';
+import { TaskItem } from './TaskItem';
+import { Modal } from '../modal/Modal';
 import { useState } from 'react';
-
-interface Task {
-  id: number;
-  title: string;
-  date: string;
-  completed: boolean;
-}
+import { CreateTask } from './CreateTask';
 
 const initialTasks: Task[] = [
   {
@@ -45,11 +42,24 @@ const initialTasks: Task[] = [
 
 export function Tasks() {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   const handleToggle = (id: number) => {
     setTasks((currentTasks) =>
       currentTasks.map((task) => (task.id === id ? { ...task, completed: !task.completed } : task)),
     );
+  };
+
+  const handleDeleteTask = (id: number) => {
+    setTasks((currentTasks) => currentTasks.filter((task) => task.id !== id));
+  };
+
+  const openCreateTask = () => {
+    setIsCreateOpen(true);
+  };
+
+  const closeCreateTask = () => {
+    setIsCreateOpen(false);
   };
 
   return (
@@ -60,32 +70,17 @@ export function Tasks() {
       </div>
       <div className={styles.tasks}>
         {tasks.map((task) => (
-          <div className={styles.taskDiv} key={task.id}>
-            <div className={`${styles.task} ${task.completed ? styles.completed : ''}`}>
-              <button
-                className={`${styles.checkbox} ${task.completed ? styles.checked : ''}`}
-                onClick={() => handleToggle(task.id)}
-                type="button"
-              >
-                {task.completed && '✓'}
-              </button>
-
-              <div className={styles.info}>
-                <span className={`${styles.title} ${task.completed ? styles.completedTitle : ''}`}>
-                  {task.title}
-                </span>
-                <span className={styles.date}>{task.date}</span>
-              </div>
-            </div>
-
-            <button className={`${styles.delete} material-symbols-outlined`}>delete</button>
-          </div>
+          <TaskItem key={task.id} task={task} onToggle={handleToggle} onDelete={handleDeleteTask} />
         ))}
       </div>
-      <button className={styles.button}>
-        {' '}
+      <button className={styles.button} onClick={openCreateTask}>
         <img className={styles.icon} src={plusIcon} alt="" /> Создать задачу
       </button>
+      {isCreateOpen && (
+        <Modal accentColor="..." onClose={() => setIsCreateOpen(false)}>
+          <CreateTask onAddTask={() => {}} onClose={closeCreateTask} />
+        </Modal>
+      )}
     </div>
   );
 }
