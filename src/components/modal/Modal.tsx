@@ -3,13 +3,12 @@ import { createPortal } from 'react-dom';
 import type { ReactNode } from 'react';
 
 interface ModalProps {
-  title: string;
   children: ReactNode;
   onClose: () => void;
   accentColor: string;
 }
 
-export function Modal({ title, children, onClose, accentColor }: ModalProps) {
+export function Modal({ children, onClose, accentColor }: ModalProps) {
   return createPortal(
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(event) => event.stopPropagation()}>
@@ -21,7 +20,6 @@ export function Modal({ title, children, onClose, accentColor }: ModalProps) {
         >
           close
         </button>
-        <h3>{title}</h3>
         {children}
       </div>
     </div>,

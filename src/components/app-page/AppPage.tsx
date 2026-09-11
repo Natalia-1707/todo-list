@@ -7,6 +7,7 @@ import birthdayIcon from '../../assets/images/birthdays.svg';
 import booksIcon from '../../assets/images/movies.svg';
 import motivationIcon from '../../assets/images/motivation.svg';
 import { Modal } from '../modal/Modal';
+import { Tasks } from '../tasks/Tasks';
 
 function AppPage() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
@@ -61,12 +62,8 @@ function AppPage() {
       </div>
 
       {currentButton && (
-        <Modal
-          title={currentButton.title}
-          onClose={() => setActiveModal(null)}
-          accentColor={currentButton.color}
-        >
-          <p>Здесь пока будет контент</p>
+        <Modal onClose={() => setActiveModal(null)} accentColor={currentButton.color}>
+          {activeModal === 'tasks' && <Tasks />}
         </Modal>
       )}
     </div>
