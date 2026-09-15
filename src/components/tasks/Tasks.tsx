@@ -20,29 +20,12 @@ const initialTasks: Task[] = [
     date: 'Oct 12',
     completed: false,
   },
-  {
-    id: 3,
-    title: 'Review design mockups',
-    date: 'Oct 14',
-    completed: false,
-  },
-  {
-    id: 4,
-    title: 'Finish project report',
-    date: 'Oct 15',
-    completed: false,
-  },
-  {
-    id: 5,
-    title: 'Team standup notes',
-    date: 'Tomorrow',
-    completed: true,
-  },
 ];
 
 export function Tasks() {
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
 
   const handleToggle = (id: number) => {
     setTasks((currentTasks) =>
@@ -62,6 +45,32 @@ export function Tasks() {
     setIsCreateOpen(false);
   };
 
+  const handleAddTask = (title: string) => {
+    const newTask: Task = {
+      id: Date.now(),
+      title,
+      date: 'Сегодня',
+      completed: false,
+    };
+    setTasks((currentTasks) => [...currentTasks, newTask]);
+  };
+
+  const openEditTask = (id: number) => {
+    setEditingTaskId(id);
+  };
+
+  const closeEditTask = () => {
+    setEditingTaskId(null);
+  };
+
+  const handleEditTask = (title: string) => {
+    setTasks((currentTasks) =>
+      currentTasks.map((task) => (task.id === editingTaskId ? { ...task, title } : task)),
+    );
+  };
+
+  const editingTask = tasks.find((task) => task.id === editingTaskId);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -70,15 +79,32 @@ export function Tasks() {
       </div>
       <div className={styles.tasks}>
         {tasks.map((task) => (
-          <TaskItem key={task.id} task={task} onToggle={handleToggle} onDelete={handleDeleteTask} />
+          <TaskItem
+            key={task.id}
+            task={task}
+            onToggle={handleToggle}
+            onDelete={handleDeleteTask}
+            onEdit={openEditTask}
+          />
         ))}
       </div>
       <button className={styles.button} onClick={openCreateTask}>
         <img className={styles.icon} src={plusIcon} alt="" /> Создать задачу
       </button>
       {isCreateOpen && (
-        <Modal accentColor="..." onClose={() => setIsCreateOpen(false)}>
-          <CreateTask onAddTask={() => {}} onClose={closeCreateTask} />
+        <Modal accentColor="var(--color-tasks-border)" onClose={closeCreateTask}>
+          <CreateTask onAddTask={handleAddTask} onClose={closeCreateTask} />
+        </Modal>
+      )}
+
+      {editingTask && (
+        <Modal accentColor="var(--color-tasks-border)" onClose={closeEditTask}>
+          <CreateTask
+            initialTitle={editingTask.title}
+            isEditing
+            onAddTask={handleEditTask}
+            onClose={closeEditTask}
+          />
         </Modal>
       )}
     </div>

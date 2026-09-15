@@ -5,11 +5,12 @@ interface TaskItemProps {
   task: Task;
   onToggle: (id: number) => void;
   onDelete: (id: number) => void;
+  onEdit: (id: number) => void;
 }
 
-export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
+export function TaskItem({ task, onToggle, onDelete, onEdit }: TaskItemProps) {
   return (
-    <div className={styles.taskDiv} key={task.id}>
+    <div className={styles.taskDiv}>
       <div className={`${styles.task} ${task.completed ? styles.completed : ''}`}>
         <button
           className={`${styles.checkbox} ${task.completed ? styles.checked : ''}`}
@@ -27,10 +28,17 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
         </div>
       </div>
       <div className={styles.taskItemButtons}>
-        <button className={`${styles.edit} material-symbols-outlined`}>edit</button>
+        <button
+          className={`${styles.edit} material-symbols-outlined`}
+          onClick={() => onEdit(task.id)}
+          type="button"
+        >
+          edit
+        </button>
         <button
           className={`${styles.delete} material-symbols-outlined`}
           onClick={() => onDelete(task.id)}
+          type="button"
         >
           delete
         </button>
