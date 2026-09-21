@@ -8,6 +8,15 @@ interface TaskItemProps {
   onEdit: (id: number) => void;
 }
 
+const formatTaskDate = (date: string) => {
+  const [year, month, day] = date.split('-').map(Number);
+
+  return new Intl.DateTimeFormat('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+  }).format(new Date(year, month - 1, day));
+};
+
 export function TaskItem({ task, onToggle, onDelete, onEdit }: TaskItemProps) {
   return (
     <div className={styles.taskDiv}>
@@ -24,7 +33,7 @@ export function TaskItem({ task, onToggle, onDelete, onEdit }: TaskItemProps) {
           <span className={`${styles.title} ${task.completed ? styles.completedTitle : ''}`}>
             {task.title}
           </span>
-          <span className={styles.date}>{task.date}</span>
+          <span className={styles.date}>{formatTaskDate(task.date)}</span>
         </div>
       </div>
       <div className={styles.taskItemButtons}>

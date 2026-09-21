@@ -11,13 +11,13 @@ const initialTasks: Task[] = [
   {
     id: 1,
     title: 'Buy groceries',
-    date: 'Today',
+    date: '2026-09-21',
     completed: true,
   },
   {
     id: 2,
     title: 'Call dentist',
-    date: 'Oct 12',
+    date: '2026-09-21',
     completed: false,
   },
 ];
@@ -45,11 +45,11 @@ export function Tasks() {
     setIsCreateOpen(false);
   };
 
-  const handleAddTask = (title: string) => {
+  const handleAddTask = (title: string, date: string) => {
     const newTask: Task = {
       id: Date.now(),
       title,
-      date: 'Сегодня',
+      date,
       completed: false,
     };
     setTasks((currentTasks) => [...currentTasks, newTask]);
@@ -63,13 +63,15 @@ export function Tasks() {
     setEditingTaskId(null);
   };
 
-  const handleEditTask = (title: string) => {
+  const handleEditTask = (title: string, date: string) => {
     setTasks((currentTasks) =>
-      currentTasks.map((task) => (task.id === editingTaskId ? { ...task, title } : task)),
+      currentTasks.map((task) => (task.id === editingTaskId ? { ...task, title, date } : task)),
     );
   };
 
   const editingTask = tasks.find((task) => task.id === editingTaskId);
+
+  const sortedTasks = [...tasks].sort((a, b) => a.date.localeCompare(b.date));
 
   return (
     <div className={styles.wrapper}>
@@ -78,7 +80,7 @@ export function Tasks() {
         <h3>Мои задачи</h3>
       </div>
       <div className={styles.tasks}>
-        {tasks.map((task) => (
+        {sortedTasks.map((task) => (
           <TaskItem
             key={task.id}
             task={task}
@@ -101,6 +103,7 @@ export function Tasks() {
         <Modal accentColor="var(--color-tasks-border)" onClose={closeEditTask}>
           <CreateTask
             initialTitle={editingTask.title}
+            initialDate={editingTask.date}
             isEditing
             onAddTask={handleEditTask}
             onClose={closeEditTask}
