@@ -4,26 +4,19 @@ import tasksIcon from '../../assets/images/tasksmodal.svg';
 import type { Task } from './task.types';
 import { TaskItem } from './TaskItem';
 import { Modal } from '../modal/Modal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CreateTask } from './CreateTask';
 
-const initialTasks: Task[] = [
-  {
-    id: 1,
-    title: 'Buy groceries',
-    date: '2026-09-21',
-    completed: true,
-  },
-  {
-    id: 2,
-    title: 'Call dentist',
-    date: '2026-09-21',
-    completed: false,
-  },
-];
-
 export function Tasks() {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const [tasks, setTasks] = useState<Task[]>(() => {
+    const savedTasks = localStorage.getItem('tasks');
+    return savedTasks !== null ? JSON.parse(savedTasks) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingTaskId, setEditingTaskId] = useState<number | null>(null);
 
@@ -80,6 +73,7 @@ export function Tasks() {
         <h3>Мои задачи</h3>
       </div>
       <div className={styles.tasks}>
+        {sortedTasks.length === 0 && <div className={styles.noTask}>У тебя пока нет задач</div>}
         {sortedTasks.map((task) => (
           <TaskItem
             key={task.id}

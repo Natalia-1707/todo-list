@@ -20,6 +20,12 @@
   gap: 12px;
 }
 
+.noTask {
+  display: flex;
+  justify-content: center;
+  font-style: italic;
+}
+
 /* =========================
    TaskItem
 ========================= */
